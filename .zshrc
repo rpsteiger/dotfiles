@@ -2,7 +2,6 @@
 
 DOTFILES="/usr/share/doc/fzf/examples"
 
-
 # +---------+
 # | HISTORY |
 # +---------+
@@ -38,3 +37,7 @@ if [ $(command -v "fzf") ]; then
     source "$DOTFILES/completion.zsh"
     source "$DOTFILES/key-bindings.zsh"
 fi
+
+# adding npm global installed programs to the path
+path=('/usr/local/lib', $path)
+export PATH
