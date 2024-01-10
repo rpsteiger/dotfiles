@@ -1,5 +1,3 @@
-#!/usr/bin/env zsh
-
 DOTFILES="/usr/share/doc/fzf/examples"
 
 # +---------+
@@ -24,12 +22,6 @@ bindkey "^R" history-incremental-pattern-search-backward
 # Created by Zap installer
 [ -f "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh" ] && source "${XDG_DATA_HOME:-$HOME/.local/share}/zap/zap.zsh"
 
-plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/supercharge"
-plug "zap-zsh/atmachine-prompt"
-plug "zap-zsh/vim"
-plug "zsh-users/zsh-syntax-highlighting"
-
 # +-----+
 # | FZF |
 # +-----+
@@ -37,6 +29,35 @@ if [ $(command -v "fzf") ]; then
     source "$DOTFILES/completion.zsh"
     source "$DOTFILES/key-bindings.zsh"
 fi
+
+plug "zsh-users/zsh-autosuggestions"
+plug "zap-zsh/supercharge"
+plug "zap-zsh/atmachine-prompt"
+plug "zap-zsh/vim"
+plug "zsh-users/zsh-syntax-highlighting"
+plug "Aloxaf/fzf-tab"
+
+# Load and initialise completion system
+autoload -Uz compinit
+compinit
+
+# the default settings for fzf-tab
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# Go environment variables
+export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+export GOPATH="/Users/ryansteiger/myprojects/go_projects/"
+export PATH=$PATH:"$GOPATH"/bin
 
 # adding npm global installed programs to the path
 path=('/usr/local/lib', $path)
