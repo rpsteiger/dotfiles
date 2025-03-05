@@ -35,7 +35,7 @@ plug "zap-zsh/supercharge"
 plug "zap-zsh/atmachine-prompt"
 plug "zap-zsh/vim"
 plug "zsh-users/zsh-syntax-highlighting"
-plug "Aloxaf/fzf-tab"
+# plug "Aloxaf/fzf-tab"
 
 # Load and initialise completion system
 autoload -Uz compinit
@@ -54,11 +54,34 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 zstyle ':fzf-tab:*' switch-group ',' '.'
 
 # Go environment variables
-export PATH=$PATH:/usr/local/go/bin
-export GOROOT=/usr/local/go
-export GOPATH="/Users/ryansteiger/myprojects/go_projects/"
+export GOROOT="/usr/local/go"
+export PATH=$PATH:"/usr/local/go/bin"
+export GOPATH="/home/ryan/go/"
+export GOBIN="/home/ryan/go/bin"
 export PATH=$PATH:"$GOPATH"/bin
 
-# adding npm global installed programs to the path
-path=('/usr/local/lib', $path)
-export PATH
+# adding the folder ~/.bin for my shell scripts
+export PATH=$PATH:"/home/ryan/.bin"
+export PATH=$PATH:"/opt/jadx/bin"
+export PATH=$PATH:"~/.local/bin"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# ls aliases
+alias ls=logo-ls
+alias lsa='logo-ls -a'
+alias lsla='logo-ls -l -a'
+
+alias proj1='cd /home/ryan/1_Projects/raya_design_site/app/public/wp-content/themes/rayadesign-site'
+
+setxkbmap eu   
+
+if [[ ! $TERM =~ "tmux" ]] && [ -z "$TMUX" ]; then
+  tmux attach || tmux
+fi
+
+# zoxide init
+eval "$(zoxide init zsh)"
+
