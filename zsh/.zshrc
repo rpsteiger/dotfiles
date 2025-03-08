@@ -1,4 +1,7 @@
-DOTFILES="/usr/share/doc/fzf/examples"
+FZF_SCRIPTS="/usr/share/doc/fzf/examples"
+if [[ "$(uname)" == "Darwin" ]]; then
+	FZF_SCRIPTS="/opt/homebrew/opt/fzf/shell/"
+fi
 
 # +---------+
 # | HISTORY |
@@ -26,8 +29,8 @@ bindkey "^R" history-incremental-pattern-search-backward
 # | FZF |
 # +-----+
 if [ $(command -v "fzf") ]; then
-    source "$DOTFILES/completion.zsh"
-    source "$DOTFILES/key-bindings.zsh"
+	source "$FZF_SCRIPTS/completion.zsh"
+	source "$FZF_SCRIPTS/key-bindings.zsh"
 fi
 
 plug "zsh-users/zsh-autosuggestions"
@@ -41,18 +44,6 @@ plug "zsh-users/zsh-syntax-highlighting"
 autoload -Uz compinit
 compinit
 
-# the default settings for fzf-tab
-# disable sort when completing `git checkout`
-zstyle ':completion:*:git-checkout:*' sort false
-# set descriptions format to enable group support
-zstyle ':completion:*:descriptions' format '[%d]'
-# set list-colors to enable filename colorizing
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
-# preview directory's content with exa when completing cd
-zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
-# switch group using `,` and `.`
-zstyle ':fzf-tab:*' switch-group ',' '.'
-
 # Go environment variables
 export GOROOT="/usr/local/go"
 export PATH=$PATH:"/usr/local/go/bin"
@@ -65,6 +56,11 @@ export PATH=$PATH:"/home/ryan/.bin"
 export PATH=$PATH:"/opt/jadx/bin"
 export PATH=$PATH:"~/.local/bin"
 
+# adding brew path for macOS
+if [[ "$(uname)" == "Darwin" ]]; then
+	export PATH=$PATH:"/opt/homebrew/bin"
+fi
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -74,14 +70,11 @@ alias ls=logo-ls
 alias lsa='logo-ls -a'
 alias lsla='logo-ls -l -a'
 
-alias proj1='cd /home/ryan/1_Projects/raya_design_site/app/public/wp-content/themes/rayadesign-site'
-
-setxkbmap eu   
-
-if [[ ! $TERM =~ "tmux" ]] && [ -z "$TMUX" ]; then
-  tmux attach || tmux
-fi
-
+# if [[ ! $TERM =~ "tmux" ]] && [ -z "$TMUX" ]; then
+#   tmux attach || tmux
+# fi
+ 
 # zoxide init
 eval "$(zoxide init zsh)"
 
+export TERM=screen-256color
