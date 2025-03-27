@@ -588,6 +588,7 @@ require('lazy').setup({
             },
           },
         },
+
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -598,6 +599,28 @@ require('lazy').setup({
         -- But for many setups, the LSP (`tsserver`) will work just fine
         -- tsserver = {},
         --
+
+        intelephense = {
+          settings = {
+            intelephense = {
+              stubs = {
+                'wordpress',
+                'woocommerce',
+                'wp-cli',
+                'genesis',
+                'polylang',
+                'acf',
+                'wordpress-globals',
+                'wp-cli',
+                'wp-cli-commands',
+              },
+              diagnostics = {
+                undefinedFunctions = false, -- Hide undefined function warnings
+                undefinedConstants = false,
+              },
+            },
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -858,7 +881,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'go', 'php', 'css', 'javascript' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -945,8 +968,11 @@ require 'user.formatting'
 require 'user.snippets.go_snippets'
 require 'user.floaterminal'
 require 'user.fix-imports'
+require 'user.diagnostics'
 
--- this does nothing
+require('lspconfig').html.setup {
+  filetypes = { 'html', 'php' }, -- Make it work in PHP files
+}
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
