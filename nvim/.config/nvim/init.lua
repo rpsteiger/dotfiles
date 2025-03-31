@@ -974,5 +974,8 @@ require('lspconfig').html.setup {
   filetypes = { 'html', 'php' }, -- Make it work in PHP files
 }
 
+vim.o.winbar = "%!v:lua.require('mini.statusline').active()"
+vim.o.laststatus = 3 -- Ensures a global statusline
+
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
