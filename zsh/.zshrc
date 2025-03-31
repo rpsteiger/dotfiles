@@ -66,14 +66,10 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ls aliases
-alias ls=logo-ls
-alias lsa='logo-ls -a'
-alias lsla='logo-ls -l -a'
+alias ls='eza --icons --group-directories-first'
 
-# if [[ ! $TERM =~ "tmux" ]] && [ -z "$TMUX" ]; then
-#   tmux attach || tmux
-# fi
- 
+alias cat='bat --theme="Nord" --color=always --wrap=auto --style=plain'
+
 # zoxide init
 eval "$(zoxide init zsh)"
 
