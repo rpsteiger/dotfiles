@@ -1,3 +1,9 @@
+## Prerequisites
+**Install TPM Plugin manager first:**
+```
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+
 ## Crontab Setup (Linux)
 Add the the following line (using crontab -e) to cron to apply the changes hourly
 ```
