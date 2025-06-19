@@ -47,9 +47,7 @@ compinit
 # Go environment variables
 export GOROOT="/usr/local/go"
 export PATH=$PATH:"/usr/local/go/bin"
-export GOPATH="/home/ryan/go/"
 export GOBIN="/home/ryan/go/bin"
-export PATH=$PATH:"$GOPATH"/bin
 
 # adding the folder ~/.bin for my shell scripts
 export PATH=$PATH:"/home/ryan/.bin"
@@ -66,7 +64,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # ls aliases
-alias ls='eza --icons --group-directories-first'
+alias ls='eza --icons --group-directories-first --links'
 
 alias cat='bat --theme="Nord" --color=always --wrap=auto --style=plain'
 
