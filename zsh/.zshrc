@@ -38,7 +38,6 @@ plug "zap-zsh/supercharge"
 plug "zap-zsh/atmachine-prompt"
 plug "zap-zsh/vim"
 plug "zsh-users/zsh-syntax-highlighting"
-# plug "Aloxaf/fzf-tab"
 
 # Load and initialise completion system
 autoload -Uz compinit
@@ -66,7 +65,13 @@ export NVM_DIR="$HOME/.nvm"
 # ls aliases
 alias ls='eza --icons --group-directories-first --links'
 
-alias cat='bat --theme="Nord" --color=always --wrap=auto --style=plain'
+# the bat command is batcat on linux
+BATNAME='bat'
+if [[ -f /etc/os-release ]] && grep -q '^ID=kali' /etc/os-release; then
+	BATNAME='batcat'
+fi
+
+alias cat="$BATNAME --theme='Tokyo Night' --color=always --wrap=auto --style=plain"
 
 # zoxide init
 eval "$(zoxide init zsh)"
