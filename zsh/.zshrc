@@ -34,10 +34,10 @@ if [ $(command -v "fzf") ]; then
 fi
 
 plug "zsh-users/zsh-autosuggestions"
-plug "zap-zsh/supercharge"
 plug "zap-zsh/atmachine-prompt"
 plug "zap-zsh/vim"
 plug "zsh-users/zsh-syntax-highlighting"
+plug "zsh-users/zsh-history-substring-search"
 
 # Load and initialise completion system
 autoload -Uz compinit
