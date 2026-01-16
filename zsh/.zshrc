@@ -71,7 +71,7 @@ if [[ -f /etc/os-release ]] && grep -q '^ID=kali' /etc/os-release; then
 	BATNAME='batcat'
 fi
 
-alias cat="$BATNAME --theme='Tokyo Night' --color=always --wrap=auto --style=plain"
+alias cat="$BATNAME --theme='tokyonight_night' --color=always --wrap=auto --style=plain"
 
 # zoxide init
 eval "$(zoxide init zsh)"
